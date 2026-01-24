@@ -1,10 +1,10 @@
 {
-       "pack": {
-           "pack_format": 41,
-           "supported_formats": {
-               "min_inclusive": 41,
-               "max_inclusive": 48
-           },
-           "description": "Template for datapacks. Put together by 100percentme"
-       }
-   }
+  "pack": {
+    "pack_format": 41,
+    "supported_formats": {
+      "min_inclusive": 41,
+      "max_inclusive": 48
+    },
+    "description": "Aether Void replaces void death with a configurable recovery system that returns players to safe heights or their last grounded position across all dimensions."
+  }
+}

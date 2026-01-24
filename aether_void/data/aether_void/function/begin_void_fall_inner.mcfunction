@@ -6,7 +6,7 @@ scoreboard players set @s av_timer 0
 execute store result score @s av_health run data get entity @s Health 1
 
 # Give huge safe fall distance so vanilla never applies fall damage for this fall
-attribute @s minecraft:safe_fall_distance base set 1000
+attribute @s minecraft:generic.safe_fall_distance base set 1000
 
 
 # Teleport logic with returnToLastGrounded support

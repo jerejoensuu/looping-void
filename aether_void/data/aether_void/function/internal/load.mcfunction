@@ -31,7 +31,7 @@ execute unless score #fallingHeightNether av_cfg matches 0.. run scoreboard play
 execute unless score #fallingHeightEnd av_cfg matches 0.. run scoreboard players set #fallingHeightEnd av_cfg 160
 
 # Max ticks allowed in aether void fall before failsafe kicks in
-execute unless score #maxTicks av_cfg matches 0.. run scoreboard players set #maxTicks av_cfg 200
+execute unless score #maxTicks av_cfg matches 0.. run scoreboard players set #maxTicks av_cfg 220
 
 # PreventDeath: 1 = clamp damage to leave 1 health, 0 = do full damage
 execute unless score #preventDeath av_cfg matches 0.. run scoreboard players set #preventDeath av_cfg 1

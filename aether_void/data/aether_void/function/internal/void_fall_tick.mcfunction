@@ -10,7 +10,7 @@ execute if score @s av_timer matches 3.. if predicate aether_void:is_soft_landin
 # 2. Hard landing: on solid ground → end with custom landing damage
 execute if score @s av_timer matches 3.. if predicate aether_void:is_landed run function aether_void:internal/end_void_fall
 
-# 3. Failsafe: if we have been in state too long, end anyway (with damage)
+# 3. Failsafe: if we have been in state too long, end anyway (with no damage)
 execute if score @s av_timer >= #maxTicks av_cfg run function aether_void:internal/end_void_fall_nodamage
 
 

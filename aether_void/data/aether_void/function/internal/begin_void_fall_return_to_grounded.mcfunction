@@ -13,8 +13,8 @@ execute as @e[type=minecraft:marker,tag=last_ground_marker] \
 
 # 4. If owner has a marker, tp above that marker using fallingHeight
 execute if entity @e[type=minecraft:marker,tag=av_temp,limit=1] \
-    run function aether_void:tp_up_from_marker
+    run function aether_void:internal/tp_up_from_marker
 
 # 5. Fallback: if no marker exists, tp up from current position using fallingHeight
 execute unless entity @e[type=minecraft:marker,tag=av_temp,limit=1] \
-    run function aether_void:tp_up_from_self
+    run function aether_void:internal/tp_up_from_self

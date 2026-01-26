@@ -12,4 +12,4 @@ execute store result storage aether_void:coords x double 1 run scoreboard player
 execute store result storage aether_void:coords y double 1 run scoreboard players get @s av_y
 execute store result storage aether_void:coords z double 1 run scoreboard players get @s av_z
 
-function aether_void:tp_from_storage with storage aether_void:coords
+function aether_void:internal/tp_from_storage with storage aether_void:coords

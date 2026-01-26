@@ -11,26 +11,11 @@
       }
     },
     {
-      "condition": "minecraft:entity_properties",
-      "entity": "this",
+      "condition": "minecraft:location_check",
+      "offsetY": -1,
       "predicate": {
-        "flags": {},
-        "stepping_on": {
-          "fluid": {
-            "fluids": ["minecraft:water"]
-          }
-        }
-      }
-    },
-    {
-      "condition": "minecraft:entity_properties",
-      "entity": "this",
-      "predicate": {
-        "flags": {},
-        "stepping_on": {
-          "fluid": {
-            "fluids": ["minecraft:flowing_water"]
-          }
+        "block": {
+          "blocks": "minecraft:cobweb"
         }
       }
     },
@@ -39,7 +24,25 @@
       "offsetY": -1,
       "predicate": {
         "block": {
-          "blocks": ["minecraft:cobweb", "minecraft:slime_block"]
+          "blocks": "minecraft:slime_block"
+        }
+      }
+    },
+    {
+      "condition": "minecraft:location_check",
+      "offsetY": -1,
+      "predicate": {
+        "fluid": {
+          "fluids": "minecraft:flowing_water"
+        }
+      }
+    },
+    {
+      "condition": "minecraft:location_check",
+      "offsetY": -1,
+      "predicate": {
+        "fluid": {
+          "fluids": "minecraft:water"
         }
       }
     },

@@ -1,5 +1,5 @@
 {
-  "condition": "minecraft:any_of",
+  "condition": "minecraft:all_of",
   "terms": [
     {
       "condition": "minecraft:entity_properties",
@@ -7,6 +7,20 @@
       "predicate": {
         "flags": {
           "is_on_ground": true
+        }
+      }
+    },
+    {
+      "condition": "minecraft:inverted",
+      "term": {
+        "condition": "minecraft:location_check",
+        "offsetY": -1,
+        "predicate": {
+          "block": {
+            "blocks": [
+              "minecraft:air"
+            ]
+          }
         }
       }
     }

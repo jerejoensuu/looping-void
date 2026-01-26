@@ -1,8 +1,8 @@
 {
   "pack": {
-    "pack_format": 41,
+    "pack_format": 94,
     "supported_formats": {
-      "min_inclusive": 57,
+      "min_inclusive": 94,
       "max_inclusive": 94
     },
     "description": "Aether Void replaces void death with a configurable recovery system that returns players to safe heights or their last grounded position across all dimensions."

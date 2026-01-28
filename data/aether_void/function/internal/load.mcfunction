@@ -1,5 +1,8 @@
 # ==== SCOREBOARDS ====
 
+# Trigger
+scoreboard objectives add aether_void_config trigger
+
 # 0 = normal, 1 = in aether void fall
 scoreboard objectives add av_state dummy
 

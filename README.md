@@ -4,7 +4,7 @@ A datapack that replaces Minecraft’s default void death with a controlled, con
 The system is deterministic, dimension-aware and multiplayer-safe.
 
 <p align="center">
-  <img src="./images/looping_void_demo.gif" alt="Demo gif" width="75%" >
+  <img src="./images/banner.jpg" alt="Banner" width="75%" >
 <p/>
 
 <br>
@@ -23,6 +23,10 @@ The system is deterministic, dimension-aware and multiplayer-safe.
   - Return above last grounded block
   - Return above current horizontal position
 - Dimension-specific return heights
+
+<p align="center">
+  <img src="./images/looping_void_demo.gif" alt="Demo gif" width="75%" >
+<p/>
 
 ### Landing damage modes
 Three distinct modes:

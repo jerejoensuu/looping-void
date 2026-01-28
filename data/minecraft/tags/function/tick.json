@@ -1,3 +1,3 @@
 {
-  "values": ["aether_void:internal/tick"]
+  "values": ["looping_void:internal/tick"]
 }

@@ -1,10 +1,10 @@
-# Aether Void
+# Looping Void
 A datapack that replaces Minecraft’s default void death with a controlled, configurable recovery system. Instead of instantly dying, players are detected before void death triggers and are teleported to a safe height, either above their last grounded position or above their current X/Z, and then handled by a configurable landing-damage mode.
 
 The system is deterministic, dimension-aware and multiplayer-safe.
 
 <p align="center">
-  <img src="./images/aether_void_demo.gif" alt="Demo gif" width="75%" >
+  <img src="./images/looping_void_demo.gif" alt="Demo gif" width="75%" >
 <p/>
 
 <br>
@@ -51,17 +51,17 @@ Alternatively, if the player is not detected to have landed after a few seconds,
 Access the UI with:
 
 ```
-/function aether_void:config
+/function looping_void:config
 ```
 
 or:
 
 ```
-/trigger aether_void_config
+/trigger looping_void_config
 ```
 
 <p align="center">
-  <img src="./images/ather_void-config_screenshot.jpg" alt="Config screenshot" width="75%" >
+  <img src="./images/looping_void-config_screenshot.jpg" alt="Config screenshot" width="75%" >
 <p/>
 
 The menu is fully interactive, using clickable tellraw buttons. It includes:
@@ -97,7 +97,7 @@ All handled through internal config functions.
 <br>
 
 ## Macro usage
-Aether Void uses function-macro expansion to support runtime-dynamic values:
+Looping Void uses function-macro expansion to support runtime-dynamic values:
 
 ```mcfunction
 $tp @s $(x) $(y) $(z)
@@ -107,7 +107,7 @@ $damage @s $(amount)
 Combined with:
 
 ```mcfunction
-function ... with storage aether_void:coords
+function ... with storage looping_void:coords
 ```
 
 This allows:
@@ -135,11 +135,11 @@ Place the datapack into:
 Enable:
 
 ```
-/datapack enable "file/aether_void"
+/datapack enable "file/looping_void"
 ```
 
 Open the configuration menu:
 
 ```
-/function aether_void:config
+/function looping_void:config
 ```

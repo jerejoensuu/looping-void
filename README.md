@@ -3,6 +3,10 @@ A datapack that replaces Minecraft’s default void death with a controlled, con
 
 The system is deterministic, dimension-aware and multiplayer-safe.
 
+<p align="center">
+  <img src="./images/aether_void_demo.gif" alt="Demo gif" width="75%" >
+<p/>
+
 <br>
 
 ## Technical summary of features
@@ -55,6 +59,10 @@ or:
 ```
 /trigger aether_void_config
 ```
+
+<p align="center">
+  <img src="./images/ather_void-config_screenshot.jpg" alt="Config screenshot" width="75%" >
+<p/>
 
 The menu is fully interactive, using clickable tellraw buttons. It includes:
 

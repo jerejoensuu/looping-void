@@ -1,93 +1,95 @@
 # Aether Void
 A datapack that replaces Minecraft’s default void death with a controlled, configurable recovery system. Instead of instantly dying, players are detected before void death triggers and are teleported to a safe height, either above their last grounded position or above their current X/Z, and then handled by a configurable landing-damage mode.
 
----
+The system is deterministic, dimension-aware and multiplayer-safe.
 
-## Features
+<br>
+
+## Technical summary of features
 
 ### Void detection
-- Separate enable/disable flags per dimension:  
-  - `#triggerOverworld`  
-  - `#triggerNether`  
-  - `#triggerEnd`
-- Detection uses a predicate (`is_in_void`) to avoid false positives.
-- Only triggers when player is not already in a void-fall state.
+- Per-dimension enable/disable:
+  - `Overworld`, `The Nether`, `The End`
+- Accurate void detection via predicate (`is_in_void`)
+- Players cannot trigger void recovery twice simultaneously (`av_state` lock)
 
 ### Return position
-- Tracks last grounded location via per-player marker entities.
-- Two teleport behaviors:
-  - Above last grounded block (`#returnToLastGrounded = 1`)
-  - Above current horizontal location (`#returnToLastGrounded = 0`)
-- Dimension specific teleport heights:  
-  - `#fallingHeightOverworld`  
-  - `#fallingHeightNether`  
-  - `#fallingHeightEnd`
+- Tracks last grounded location using per-player marker entities
+- Configurable teleport behavior:
+  - Return above last grounded block
+  - Return above current horizontal position
+- Dimension-specific return heights
 
 ### Landing damage modes
-Aether Void provides explicit landing damage modes, resolved in priority order:
+Three distinct modes:
 
-1. **PreventDeath mode** (`#dmPreventDeath`)  
-   Leaves player at half a heart. Uses real Health NBT.
+1. **PreventDeath**  
+   - Prevents void-landing death by clamping player to half a heart.
 
-2. **Absolute mode** (`#dmAbsolute`)  
-   Applies exactly `#dmAbsoluteDamageTaken` damage (via macros). Can kill.
+2. **Absolute**  
+   - Deals a fixed amount of damage defined by `Absolute Damage Taken`.
 
-3. **Normal mode** (`#dmNormal`)  
-   Allows vanilla (or modded) fall damage untouched.
+3. **Normal**  
+   - Leaves landing damage fully vanilla (or modpack-modified).
+  
+Custom damage modes are ignored if the player lands on surfaces that would normally reset fall damage or if they start flying. Modded damage resetting methods are supported if they implement the same tags/states vanilla methods do.
+Alternatively, if the player is not detected to have landed after a few seconds, the system returns to default state.
 
-Priority:  
-**PreventDeath > Absolute > Normal**
+### Per-player state machine
+- `av_state` marks players undergoing a void recovery sequence
+- Unique per-player IDs (`av_pid`) bind markers to their owner
+- State automatically resets on landing or player death
 
-### Per-player state
-- `av_state = 1` while inside a void fall, blocking re-entry.
-- `av_pid` assigns each player a stable unique ID for marker ownership.
-- State resets automatically on landing or death.
+<br>
 
----
+## Configuration
 
-## Configuration Menu
-
-Run:
+Access the UI with:
 
 ```
 /function aether_void:config
 ```
 
-Includes:
+or:
 
-### Dimension toggles  
-Simple ON/OFF buttons for:
+```
+/trigger aether_void_config
+```
+
+The menu is fully interactive, using clickable tellraw buttons. It includes:
+
+### Dimension toggles
 - Overworld  
 - Nether  
 - End  
 
-### Teleport mode  
-- Toggle `Return to last grounded`.
+Each can be toggled ON/OFF.
 
-### Damage mode selector (enum-style)  
-Three side-by-side buttons:
-- `[PreventDeath]`
-- `[Absolute]`
-- `[Normal]`
+### Teleport behavior
+- Toggle: **Return to last grounded** vs **Return above current position**
 
-Only one is active at a time.
+### Damage mode selector (enum)
+Three adjacent options, only one active at a time:
+- PreventDeath
+- Absolute
+- Normal
 
-### Absolute damage value  
-Displayed only when `#dmAbsolute = 1`.  
-Includes:  
-`[-1]   [value]   [+1]`
+### Absolute Mode settings
+If Absolute Mode is active:
+- Displayed with ±1 adjustment buttons
+- Applies exact dynamic damage using macro-powered commands
 
-### Return height settings  
-For each dimension:  
-`[-10] [-5] [-1]   [value]   [+1] [+5] [+10]`
+### Return height settings
+Each dimension gets a row with:
+```
+[-10] [-5] [-1]   [value]   [+1] [+5] [+10]
+```
+All handled through internal config functions.
 
-All via dedicated small functions.
+<br>
 
----
-
-## Macro Usage
-
-The pack uses macro-powered commands:
+## Macro usage
+Aether Void uses function-macro expansion to support runtime-dynamic values:
 
 ```mcfunction
 $tp @s $(x) $(y) $(z)
@@ -97,80 +99,38 @@ $damage @s $(amount)
 Combined with:
 
 ```mcfunction
-function aether_void:some_function with storage aether_void:coords
+function ... with storage aether_void:coords
 ```
 
 This allows:
-- dynamic teleport heights
-- dynamic damage values
-- lightweight parameter passing
+- Dynamic teleport coordinates
+- Config-driven damage values
+- Clean parameter passing for all configuration actions
 
----
-
-## Internal Structure
-
-```
-aether_void/
-  data/
-    aether_void/
-      functions/
-        config/...
-        internal/...
-        begin_void_fall*
-        void_fall_tick
-        end_void_fall
-        sample_ground
-        damage_prevent_death
-        damage_absolute
-        damage_absolute_from_config
-        tp_from_storage
-    predicates/
-      is_in_void.json
-    storage/
-      coords
-      damage
-```
-
----
+<br>
 
 ## Compatibility
+- Fully vanilla datapack; no mods required
+- Multiplayer-safe and dimension-aware
+- Likely compatible with any datapacks and mods that don't include similar mechanics
 
-- Fully vanilla datapack.
-- Multiplayer-safe.
-- Does not block vanilla fall damage unless configured.
-- Uses `marker` entities (invisible).
-
----
-
-## Limitations
-
-- Absolute mode can kill players (intentionally).
-- PreventDeath only applies to landing damage — external sources can still kill during recovery.
-- Return height must be chosen sensibly to avoid teleporting into terrain.
-
----
+<br>
 
 ## Installation
 
-Place the folder in:
+Place the datapack into:
 
 ```
 <world>/datapacks/
 ```
 
-Reload:
+Enable:
 
 ```
-/reload
+/datapack enable "file/aether_void"
 ```
 
-Initialize:
-
-```
-/function aether_void:load
-```
-
-Open config:
+Open the configuration menu:
 
 ```
 /function aether_void:config

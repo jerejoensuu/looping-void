@@ -51,7 +51,7 @@ Alternatively, if the player is not detected to have landed after a few seconds,
 Access the UI with:
 
 ```
-/function looping_void:config
+/function looping_void:_config
 ```
 
 or:

@@ -1,9 +1,9 @@
 {
   "pack": {
-    "pack_format": 94,
+    "pack_format": 101.1,
     "supported_formats": {
-      "min_inclusive": 94,
-      "max_inclusive": 94
+      "min_inclusive": 101.1,
+      "max_inclusive": 101.1
     },
     "description": "Looping Void replaces void death with a configurable recovery system that returns players to safe heights or their last grounded position across all dimensions."
   }
